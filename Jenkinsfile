@@ -1,6 +1,7 @@
 node('node01') {
     // reference to maven
-    // ** NOTE: This 'maven' Maven tool must be configured in the Jenkins Global Configuration.   
+    // ** NOTE: This 'maven' Maven tool must be configured in the Jenkins Global Configuration.  
+    def app
     def mvnHome = tool 'maven'
     stage('Clone Repo') { // for display purposes
       // Get some code from a GitHub repository
@@ -32,7 +33,7 @@ node('node01') {
       // build docker image
       sh "mv ./target/hello*.jar ./data" 
       
-      dockerImage = docker.build("mahamad/hello-world-java")
+      app = docker.build("mahamad/hello-world-java")
     }
    
     stage('Deploy Docker Image'){
