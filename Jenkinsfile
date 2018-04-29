@@ -1,7 +1,7 @@
-node {
+node('node01') {
     // reference to maven
-    // ** NOTE: This 'maven-3.5.2' Maven tool must be configured in the Jenkins Global Configuration.   
-    def mvnHome = tool 'maven-3.5.2'
+    // ** NOTE: This 'maven' Maven tool must be configured in the Jenkins Global Configuration.   
+    def mvnHome = tool 'maven'
 
     // holds reference to docker image
     def dockerImage
@@ -13,11 +13,11 @@ node {
     
     stage('Clone Repo') { // for display purposes
       // Get some code from a GitHub repository
-      git 'https://github.com/dstar55/docker-hello-world-spring-boot.git'
+      git 'https://github.com/cumaha/docker-hello-world-spring-boot.git'
       // Get the Maven tool.
-      // ** NOTE: This 'maven-3.5.2' Maven tool must be configured
+      // ** NOTE: This 'maven' Maven tool must be configured
       // **       in the global configuration.           
-      mvnHome = tool 'maven-3.5.2'
+      mvnHome = tool 'maven'
     }    
   
     stage('Build Project') {
@@ -49,9 +49,8 @@ node {
       // deploy docker image to nexus
 
       echo "Docker Image Tag Name: ${dockerImageTag}"
-
-      sh "docker login -u admin -p admin123 ${dockerRepoUrl}"
-      sh "docker tag ${dockerImageName} ${dockerImageTag}"
-      sh "docker push ${dockerImageTag}"
+	  docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
     }
 }
