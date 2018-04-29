@@ -54,3 +54,4 @@ node('node01') {
             app.push("latest")
     }
 }
+}
