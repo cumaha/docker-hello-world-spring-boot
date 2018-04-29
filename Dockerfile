@@ -2,7 +2,7 @@
 FROM openjdk:8-jdk-alpine
 
 #maintainer 
-MAINTAINER dstar55@yahoo.com
+MAINTAINER maha4devops@gmail.com
 
 #expose port 8080
 EXPOSE 8080
