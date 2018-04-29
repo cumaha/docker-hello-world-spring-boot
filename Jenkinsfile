@@ -41,7 +41,7 @@ node('node01') {
       // build docker image
       sh "mv ./target/hello*.jar ./data" 
       
-      dockerImage = docker.build("hello-world-java")
+      dockerImage = docker.build("mahamad/hello-world-java")
     }
    
     stage('Deploy Docker Image'){
