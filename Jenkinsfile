@@ -38,8 +38,6 @@ node('node01') {
     stage('Deploy Docker Image'){
       
       // deploy docker image to nexus
-
-   echo "Docker Image Tag Name: ${dockerImageTag}"
 	  docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
