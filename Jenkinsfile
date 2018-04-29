@@ -2,15 +2,6 @@ node('node01') {
     // reference to maven
     // ** NOTE: This 'maven' Maven tool must be configured in the Jenkins Global Configuration.   
     def mvnHome = tool 'maven'
-
-    // holds reference to docker image
-    def dockerImage
-    // ip address of the docker private repository(nexus)
-    
-    def dockerRepoUrl = "localhost:8083"
-    def dockerImageName = "hello-world-java"
-    def dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
-    
     stage('Clone Repo') { // for display purposes
       // Get some code from a GitHub repository
       git 'https://github.com/cumaha/docker-hello-world-spring-boot.git'
