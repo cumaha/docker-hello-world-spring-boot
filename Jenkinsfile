@@ -25,14 +25,13 @@ node('node01') {
 		  archive 'target/*.jar'
         },
         publishJunitTestsResultsToSonar: {
-          echo "This is branch b"
+          echo "Copied to SonarQube"
       })
     }
 		
     stage('Build Docker Image') {
       // build docker image
       sh "mv ./target/hello*.jar ./data" 
-      
       app = docker.build("mahamad/hello-world-java")
     }
    
